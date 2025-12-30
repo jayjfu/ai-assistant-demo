@@ -11,15 +11,18 @@ parser = argparse.ArgumentParser(description="direct preference optimization (DP
 parser.add_argument('--base_model', default='unsloth/Llama-3.2-1B', type=str)
 parser.add_argument('--template_model', default='unsloth/Llama-3.2-1B-Instruct', type=str)
 parser.add_argument('--sft_model',
-                    default="./checkpoints/Llama-3.2-1B-fine-tuned-model/checkpoint-738", type=str)
+                    default="./checkpoints/Llama-3.2-1B-fine-tuned-model/checkpoint-6928", type=str)
 parser.add_argument('--hf_dataset_name', default='HuggingFaceH4/ultrafeedback_binarized', type=str)
 parser.add_argument('--batch_size', default=2, type=int)
 parser.add_argument('--lr', default=5e-5, type=float)
 parser.add_argument('--num_epochs', default=1, type=int)
-parser.add_argument('--max_length', default=512, type=str)
+parser.add_argument('--max_length', default=512, type=int)
+parser.add_argument('--logging_steps', default=1_000, type=int)
+parser.add_argument('--save_steps', default=5_000, type=int)
+parser.add_argument('--eval_steps', default=2_000, type=int)
 parser.add_argument('--no_resume', action='store_true')
 parser.add_argument('--output_dir', default="./checkpoints/", type=str)
-parser.add_argument('--output_name', default="dpo-model", type=str)
+parser.add_argument('--output_name', default="trl-dpo-model", type=str)
 args = parser.parse_args()
 
 def train(args):
@@ -48,6 +51,7 @@ def train(args):
             "chosen": chosen_text,
             "rejected": rejected_text,
         }
+
     train_dataset = dataset['train_prefs'].map(
         apply_chat_template,
         batched=False,
@@ -71,9 +75,10 @@ def train(args):
         per_device_eval_batch_size=args.batch_size,
         learning_rate=args.lr,
         num_train_epochs=args.num_epochs,
-        logging_steps=1_000,
+        logging_steps=args.logging_steps,
+        save_steps=args.save_steps,
         bf16=True,
-        eval_steps=2_000,
+        eval_steps=args.eval_steps,
         max_length=args.max_length,
     )
     dpo_trainer = DPOTrainer(

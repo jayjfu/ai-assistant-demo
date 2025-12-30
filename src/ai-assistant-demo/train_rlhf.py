@@ -56,7 +56,7 @@ def gen_response(model, tokenizer, prompt_ids):
 
 def compute_rewards(reward_model, tokenizer, prompts, responses):
     texts = [p + r for p, r in zip(prompts, responses)]
-    inputs = tokenizer(texts, truncation=True, max_length=args.max_length, padding=True, return_tensors='pt')
+    inputs = tokenizer(texts, padding=True, truncation=True, max_length=args.max_length, return_tensors='pt')
     inputs = inputs.to(reward_model.device)
     with torch.no_grad():
         rewards = reward_model(**inputs).logits.squeeze(-1)
@@ -117,8 +117,8 @@ def train(args):
         for batch in get_batches(dataset['train'], args.batch_size):
             global_step += 1
 
-            batch_ids = tokenizer(batch['prompt'], truncation=True, max_length=args.max_length,
-                                  padding=True, return_tensors='pt').input_ids
+            batch_ids = tokenizer(batch['prompt'], padding=True, truncation=True,
+                                  max_length=args.max_length, return_tensors='pt').input_ids
             batch_ids = batch_ids.to(device)
 
             with torch.no_grad():

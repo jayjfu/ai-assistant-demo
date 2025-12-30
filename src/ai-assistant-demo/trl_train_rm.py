@@ -13,10 +13,11 @@ parser.add_argument('--hf_dataset_name', default='Anthropic/hh-rlhf', type=str)
 parser.add_argument('--batch_size', default=4, type=int)
 parser.add_argument('--lr', default=1e-5, type=float)
 parser.add_argument('--num_epochs', default=1, type=int)
-parser.add_argument('--max_length', default=512, type=str)
+parser.add_argument('--max_length', default=512, type=int)
+parser.add_argument('--save_steps', default=5_000, type=int)
 parser.add_argument('--no_resume', action='store_true')
 parser.add_argument('--output_dir', default="./checkpoints", type=str)
-parser.add_argument('--output_name', default="reward-model", type=str)
+parser.add_argument('--output_name', default="trl-reward-model", type=str)
 args = parser.parse_args()
 
 def train(args):
@@ -33,6 +34,7 @@ def train(args):
         learning_rate=args.lr,
         num_train_epochs=args.num_epochs,
         logging_steps=1_000,
+        save_steps=args.save_steps,
         bf16=True,
         max_length=args.max_length,
     )
