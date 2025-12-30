@@ -64,9 +64,15 @@ python ./src/ai-assistant-demo/trl_train_dpo.py
 ```
 
 ## Inference
-TODO
+Test the model:
 ```bash
-python inference/dpo_chat.py
+# RLHF model
+python ./src/ai-assistant-demo/inference/rlhf_chat.py \
+  --prompt "How can I build a daily drawing habit?"
+
+# DPO model
+# python ./src/ai-assistant-demo/inference/dpo_chat.py \
+#   --prompt "How can I build a daily drawing habit?"
 ```
 
 ## Scripts:
