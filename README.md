@@ -166,6 +166,41 @@ python ./src/ai-assistant-demo/inference/dpo_chat.py \
   --prompt "How can I build a daily drawing habit?"
 ```
 
+## Sample Outputs
+
+**User Prompt:** 
+```text
+How can I build a daily drawing habit?
+```
+
+**Model Output:**
+
+```text
+It's important to understand that creating a daily drawing habit takes time and effort, but it can be done by prioritizing the most important aspects of the craft and making it a priority. Here are some tips that can help you build a daily drawing habit:
+
+1. **Set a goal:** Start by setting a specific goal for how many drawings you want to complete each day. This can be anything from a few drawings to a specific style or subject.
+
+2. **Find a routine:** Consistency is key. Try to go to the same time and place every day, even on weekends. This will help you develop a routine that you can stick to even on weekends.
+
+3. **Set a goal:** Give yourself a goal for the number of drawings you want to complete each day. This will help you stay motivated and track your progress.
+
+4. **Create a schedule:** Plan out your drawings in advance. This can help you stay organized and ensure that you don't waste time trying to draw something that you forgot to complete the previous day.
+
+5. **Keep a journal:** Writing down your drawings can help you reflect on what you've done well and what you can do even better. This can also help you identify any patterns or themes that you need to work on.
+
+6. **Stay hydrated:** Drinking plenty of water can help you stay focused and motivated. You can also use a water bottle or a cup of water to help you stay hydrated.
+
+7. **Take breaks:** It's important to take regular breaks to recharge your body and mind. This can help you stay focused and motivated.
+
+8. **Use a drawing app:** There are many drawing apps available that can help you stay organized and track your progress. Some popular ones include Adobe Photoshop, Canva, and Sketch.
+
+9. **Learn a new skill:** If you've never tried drawing, there are many online resources that can help you learn a new skill. Some popular ones include Udemy and Coursera.
+
+10. **Practice regularly:** Consistency is key when it comes to building a daily drawing habit. Try to go to the same time and place every day, even on weekends.
+
+Remember, building a daily drawing habit takes time and effort, but it's a rewarding hobby that can be very gratifying to see progress over time.
+```
+
 ## Scripts:
 - Training (RLHF): `scripts/rlhf_training_pipeline.sh`
 - Training (DPO): `scripts/dpo_training_pipeline.sh`
