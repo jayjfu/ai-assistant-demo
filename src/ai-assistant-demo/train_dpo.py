@@ -152,8 +152,8 @@ def train(args):
         remove_columns=raw_dataset['test_prefs'].column_names
     )
 
-    model = AutoModelForCausalLM.from_pretrained(args.sft_model, dtype=torch.bfloat16)
-    ref_model = AutoModelForCausalLM.from_pretrained(args.sft_model, dtype=torch.bfloat16)
+    model = AutoModelForCausalLM.from_pretrained(os.path.join(str(SCRIPT_DIR), args.sft_model), dtype=torch.bfloat16)
+    ref_model = AutoModelForCausalLM.from_pretrained(os.path.join(str(SCRIPT_DIR), args.sft_model), dtype=torch.bfloat16)
     ref_model.requires_grad_(False)
     ref_model.eval()
 

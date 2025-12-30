@@ -63,7 +63,7 @@ def train(args):
         remove_columns=dataset['test_prefs'].column_names
     )
 
-    model = AutoModelForCausalLM.from_pretrained(args.sft_model)
+    model = AutoModelForCausalLM.from_pretrained(os.path.join(str(SCRIPT_DIR), args.sft_model))
 
     os.makedirs(os.path.join(SCRIPT_DIR, args.output_dir), exist_ok=True)
     output_dir = os.path.join(str(SCRIPT_DIR), args.output_dir, f"{args.base_model.split('/')[-1]}-{args.output_name}")
